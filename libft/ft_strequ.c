@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 18:37:20 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/19 14:55:52 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:24:31 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 int	ft_strequ(char const *s1, char const *s2)
 {

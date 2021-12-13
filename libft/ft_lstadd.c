@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 19:27:27 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/19 14:53:59 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:22:36 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 void	ft_lstadd(t_list **alst, t_list *new)
 {

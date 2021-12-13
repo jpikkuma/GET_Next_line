@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:13:34 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/19 14:56:55 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:25:37 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {

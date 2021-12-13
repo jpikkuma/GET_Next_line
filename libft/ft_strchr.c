@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 00:03:31 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/19 14:55:33 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:24:10 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

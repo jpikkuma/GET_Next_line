@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 18:38:31 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/19 14:53:55 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:22:32 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 static size_t	ft_intlen(int n)
 {

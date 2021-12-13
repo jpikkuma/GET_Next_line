@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 00:32:52 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/19 14:57:22 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:25:55 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 int	ft_toupper(int c)
 {

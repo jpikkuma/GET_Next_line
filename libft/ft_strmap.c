@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 18:36:55 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/19 14:56:14 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:24:54 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 char	*ft_strmap(char const *s, char (*f)(char))
 {

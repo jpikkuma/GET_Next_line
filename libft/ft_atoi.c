@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 00:31:35 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/20 01:05:34 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:21:50 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {

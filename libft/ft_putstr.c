@@ -6,11 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 14:27:53 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/11/19 14:55:25 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:23:58 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 void	ft_putstr(char const *s)
 {
