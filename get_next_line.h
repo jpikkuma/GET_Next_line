@@ -6,7 +6,7 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 11:23:40 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/14 14:00:54 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 22:01:47 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # define BUFF_SIZE 1000
-# define FD_BUFF 4096
+# define FD_BUFF 10000
 
 # include "libft.h"
 
