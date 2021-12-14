@@ -6,7 +6,7 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 11:16:57 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/14 00:10:16 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:26:00 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ int	get_next_line(const int fd, char **line)
 	char		c[BUFF_SIZE + 1];
 	ssize_t		len;
 
-	if (fd < 0 || FD_BUFF < 1 || BUFF_SIZE < 1 || fd > FD_BUFF)
+	if (fd < 0 || FD_BUFF < 1 || BUFF_SIZE < 1 || fd > FD_BUFF || !line)
 		return (-1);
 	if (!buff[fd])
-		buff[fd] = ft_strdup("");
+		buff[fd] = ft_strnew(1);
 	if (!buff[fd])
 		return (-1);
 	if (ft_strnchr(buff[fd], '\n'))
