@@ -6,28 +6,11 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 11:16:57 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/14 14:26:00 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:20:53 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-
-static int	ft_strnchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (1);
-		++i;
-	}
-	if (s[i] == c)
-		return (1);
-	return (0);
-}
 
 static int	ft_join_buff(int fd, char **buff, char *c)
 {
@@ -47,48 +30,59 @@ static int	ft_join_buff(int fd, char **buff, char *c)
 	}
 }
 
-static int	ft_set_line(int fd, char **buff, char **line)
+static size_t	ft_linelen(int fd, char **buff)
 {
-	char	*tmp;
 	size_t	i;
-	int		status;
 
-	status = 1;
 	i = 0;
 	while ((buff[fd][i] != '\n') && (buff[fd][i] != '\0'))
 		++i;
+	return (i);
+}
+
+static int	ft_set_line(int fd, char **buff, char **line, size_t i)
+{
+	char	*tmp;
+
 	if (buff[fd][i] == '\n')
 	{
 		*line = ft_strsub(buff[fd], 0, i);
 		tmp = ft_strdup(&buff[fd][i + 1]);
 		if (!*line || !tmp)
-			status = 0;
+		{
+			ft_strdel(&tmp);
+			ft_strdel(line);
+			return (0);
+		}
 		ft_strdel(&buff[fd]);
 		buff[fd] = tmp;
+		if (buff[fd][0] == '\0')
+			ft_strdel(&buff[fd]);
 	}
 	else
 	{
 		*line = ft_strdup(buff[fd]);
 		if (!*line)
-			status = 0;
+			return (0);
 		ft_strdel(&buff[fd]);
 	}
-	return (status);
+	return (1);
 }
 
 static int	ft_return_line(int fd, char **buff, char **line, ssize_t len)
 {
+	size_t	i;
+
+	if (buff[fd])
+		i = ft_linelen(fd, buff);
 	if (len < 0)
 	{
 		ft_strdel(&buff[fd]);
 		return (-1);
 	}
-	if (buff[fd][0] == '\0')
-	{
-		ft_strdel(&buff[fd]);
+	else if (len == 0 && !buff[fd])
 		return (0);
-	}
-	if (!ft_set_line(fd, buff, line))
+	else if (!ft_set_line(fd, buff, line, i))
 		return (-1);
 	return (1);
 }
@@ -101,21 +95,22 @@ int	get_next_line(const int fd, char **line)
 
 	if (fd < 0 || FD_BUFF < 1 || BUFF_SIZE < 1 || fd > FD_BUFF || !line)
 		return (-1);
-	if (!buff[fd])
-		buff[fd] = ft_strnew(1);
-	if (!buff[fd])
-		return (-1);
-	if (ft_strnchr(buff[fd], '\n'))
-		return (ft_return_line(fd, buff, line, 0));
-	while (1)
+	if (buff[fd])
+		if (ft_strchr(buff[fd], '\n'))
+			return (ft_return_line(fd, buff, line, 0));
+	len = read(fd, c, BUFF_SIZE);
+	while (len > 0)
 	{
-		len = read(fd, c, BUFF_SIZE);
-		if (len <= 0)
-			return (ft_return_line(fd, buff, line, len));
+		if (!buff[fd])
+			buff[fd] = ft_strdup("");
+		if (!buff[fd])
+			return (-1);
 		c[len] = '\0';
 		if (!ft_join_buff(fd, buff, c))
 			return (-1);
-		if (ft_strnchr(c, '\n'))
-			return (ft_return_line(fd, buff, line, len));
+		if (ft_strchr(c, '\n'))
+			break ;
+		len = read(fd, c, BUFF_SIZE);
 	}
+	return (ft_return_line(fd, buff, line, len));
 }
