@@ -6,7 +6,7 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 00:30:07 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/14 00:21:48 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/24 00:02:23 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	if (n > 0)
-		ft_memset(s, 0, n);
+	ft_memset(s, 0, n);
 }

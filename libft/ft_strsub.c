@@ -6,7 +6,7 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:37:25 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/14 00:25:42 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/23 23:43:49 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char	*fresh;
-	size_t	i;
 
 	if (!s)
 		return (0);
@@ -24,12 +23,5 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start + len > ft_strlen(s))
 		return (ft_strdup(""));
-	i = 0;
-	while (s[start] && i < len)
-	{
-		fresh[i] = s[start];
-		i++;
-		start++;
-	}
-	return (fresh);
+	return ((char *)ft_memcpy((void *)fresh, (const void *)&s[start], len));
 }

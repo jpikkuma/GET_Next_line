@@ -6,7 +6,7 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 18:36:17 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/14 00:25:33 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/24 09:59:10 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,22 @@
 static size_t	ft_w_count(const char *s, char c)
 {
 	size_t	wc;
-	size_t	i;
 
 	if (!s[0])
 		return (0);
 	wc = 0;
-	i = 0;
-	if (s[i] && s[i] != c)
+	if (*s && *s != c)
 		wc++;
-	i++;
-	while (s[i])
+	while (*s)
 	{
-		if (s[i - 1] == c && s[i] != c)
-		{
+		if (*(s - 1) == c && *s != c)
 			wc++;
-			i++;
-		}
-		else
-			i++;
+		s++;
 	}
 	return (wc);
 }
 
-static void	ft_get_str(char **str, size_t *len, char c)
+static void	ft_get_str(const char **str, size_t *len, char c)
 {
 	size_t	i;
 
@@ -57,22 +50,18 @@ static void	ft_get_str(char **str, size_t *len, char c)
 
 static char	**ft_freemem(char **splitted)
 {
-	size_t	i;
-
-	i = 0;
-	while (splitted[i])
+	while (*splitted)
 	{
-		free(splitted[i]);
-		i++;
+		free(*splitted);
+		splitted++;
 	}
-	free(splitted);
+	free(*splitted);
 	return (NULL);
 }
 
 char	**ft_strsplit(char const *s, char c)
 {
 	char	**splitted;
-	char	*str;
 	size_t	len;
 	size_t	wc;
 	size_t	i;
@@ -84,15 +73,14 @@ char	**ft_strsplit(char const *s, char c)
 	if (!splitted)
 		return (NULL);
 	i = 0;
-	str = (char *)s;
 	len = 0;
 	while (i < wc)
 	{
-		ft_get_str(&str, &len, c);
+		ft_get_str(&s, &len, c);
 		splitted[i] = ft_strnew(len + 1);
 		if (!splitted[i])
 			return (ft_freemem(splitted));
-		ft_memcpy(splitted[i++], str, len);
+		ft_memcpy(splitted[i++], s, len);
 	}
 	splitted[i] = NULL;
 	return (splitted);

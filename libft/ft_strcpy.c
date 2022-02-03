@@ -6,7 +6,7 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:10:48 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/14 21:59:52 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/23 02:00:42 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,5 @@
 
 char	*ft_strcpy(char *s1, const char *s2)
 {
-	char	*tmp;
-
-	if (s1 == s2)
-		return (s1);
-	tmp = s1;
-	while (*s2)
-		*tmp++ = *s2++;
-	*tmp = '\0';
-	return (s1);
+	return (ft_memcpy((void *)s1, (void *)s2, ft_strlen(s2) + 1));
 }

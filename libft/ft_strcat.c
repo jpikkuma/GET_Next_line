@@ -6,7 +6,7 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:51:34 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/14 00:24:06 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2021/12/23 23:58:21 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 
 char	*ft_strcat(char *s1, const char *s2)
 {
-	size_t	i;
-
-	i = ft_strlen(s1);
-	ft_strcpy(s1 + i, s2);
-	return (s1);
+	return (ft_strcpy(s1 + ft_strlen(s1), s2));
 }

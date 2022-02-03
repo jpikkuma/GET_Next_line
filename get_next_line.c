@@ -6,111 +6,105 @@
 /*   By: jpikkuma <jpikkuma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 11:16:57 by jpikkuma          #+#    #+#             */
-/*   Updated: 2021/12/15 11:20:53 by jpikkuma         ###   ########.fr       */
+/*   Updated: 2022/02/03 19:22:10 by jpikkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_join_buff(int fd, char **buff, char *c)
+static int	ft_join_buffer(int fd, char **buffer, char *c)
 {
-	char	*tmp;
+	char	*temp;
 
-	tmp = ft_strjoin(buff[fd], c);
-	if (!tmp)
+	temp = ft_strjoin(buffer[fd], c);
+	if (!temp)
 	{
-		ft_strdel(&buff[fd]);
+		ft_strdel(&buffer[fd]);
 		return (0);
 	}
 	else
 	{
-		free(buff[fd]);
-		buff[fd] = tmp;
+		free(buffer[fd]);
+		buffer[fd] = temp;
 		return (1);
 	}
 }
 
-static size_t	ft_linelen(int fd, char **buff)
+static int	ft_set_line(int fd, char **buffer, char **line, size_t i)
 {
-	size_t	i;
+	char	*temp;
 
-	i = 0;
-	while ((buff[fd][i] != '\n') && (buff[fd][i] != '\0'))
-		++i;
-	return (i);
-}
-
-static int	ft_set_line(int fd, char **buff, char **line, size_t i)
-{
-	char	*tmp;
-
-	if (buff[fd][i] == '\n')
+	if (buffer[fd][i] == '\n')
 	{
-		*line = ft_strsub(buff[fd], 0, i);
-		tmp = ft_strdup(&buff[fd][i + 1]);
-		if (!*line || !tmp)
+		*line = ft_strsub(buffer[fd], 0, i);
+		temp = ft_strdup(&buffer[fd][i + 1]);
+		if (!*line || !temp)
 		{
-			ft_strdel(&tmp);
+			ft_strdel(&temp);
 			ft_strdel(line);
 			return (0);
 		}
-		ft_strdel(&buff[fd]);
-		buff[fd] = tmp;
-		if (buff[fd][0] == '\0')
-			ft_strdel(&buff[fd]);
+		ft_strdel(&buffer[fd]);
+		buffer[fd] = temp;
+		if (buffer[fd][0] == '\0')
+			ft_strdel(&buffer[fd]);
 	}
 	else
 	{
-		*line = ft_strdup(buff[fd]);
+		*line = ft_strdup(buffer[fd]);
 		if (!*line)
 			return (0);
-		ft_strdel(&buff[fd]);
+		ft_strdel(&buffer[fd]);
 	}
 	return (1);
 }
 
-static int	ft_return_line(int fd, char **buff, char **line, ssize_t len)
+static int	ft_return_line(int fd, char **buffer, char **line, ssize_t ret)
 {
 	size_t	i;
 
-	if (buff[fd])
-		i = ft_linelen(fd, buff);
-	if (len < 0)
+	i = 0;
+	if (buffer[fd])
 	{
-		ft_strdel(&buff[fd]);
+		while ((buffer[fd][i] != '\n') && (buffer[fd][i] != '\0'))
+		++i;
+	}
+	if (ret < 0)
+	{
+		ft_strdel(&buffer[fd]);
 		return (-1);
 	}
-	else if (len == 0 && !buff[fd])
+	else if (ret == 0 && !buffer[fd])
 		return (0);
-	else if (!ft_set_line(fd, buff, line, i))
+	else if (!ft_set_line(fd, buffer, line, i))
 		return (-1);
 	return (1);
 }
 
 int	get_next_line(const int fd, char **line)
 {
-	static char	*buff[FD_BUFF + 1];
-	char		c[BUFF_SIZE + 1];
-	ssize_t		len;
+	static char	*buffer[FD_BUFF + 1];
+	char		temp[BUFF_SIZE + 1];
+	ssize_t		ret;
 
 	if (fd < 0 || FD_BUFF < 1 || BUFF_SIZE < 1 || fd > FD_BUFF || !line)
 		return (-1);
-	if (buff[fd])
-		if (ft_strchr(buff[fd], '\n'))
-			return (ft_return_line(fd, buff, line, 0));
-	len = read(fd, c, BUFF_SIZE);
-	while (len > 0)
+	if (buffer[fd])
+		if (ft_strchr(buffer[fd], '\n'))
+			return (ft_return_line(fd, buffer, line, 0));
+	ret = read(fd, temp, BUFF_SIZE);
+	while (ret > 0)
 	{
-		if (!buff[fd])
-			buff[fd] = ft_strdup("");
-		if (!buff[fd])
+		if (!buffer[fd])
+			buffer[fd] = ft_strdup("");
+		if (!buffer[fd])
 			return (-1);
-		c[len] = '\0';
-		if (!ft_join_buff(fd, buff, c))
+		temp[ret] = '\0';
+		if (!ft_join_buffer(fd, buffer, temp))
 			return (-1);
-		if (ft_strchr(c, '\n'))
+		if (ft_strchr(temp, '\n'))
 			break ;
-		len = read(fd, c, BUFF_SIZE);
+		ret = read(fd, temp, BUFF_SIZE);
 	}
-	return (ft_return_line(fd, buff, line, len));
+	return (ft_return_line(fd, buffer, line, ret));
 }
